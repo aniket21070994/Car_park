@@ -5,7 +5,7 @@ import { vehical } from "../models/vehicalSchema.js";
 //searching parking for city
 export const search = async (req, res) => {
     try {
-        const {city} = req.query;
+        const {city} = req.param;
         const parkingArea = await parking.findById(city)
         return res.status(200).json({
             parkingArea,
@@ -20,7 +20,7 @@ export const search = async (req, res) => {
 export const Booking = async (req, res) => {
     try {
         //reading data from body 
-        const { name, licence,location, pid,slot,start,end } = req.body;
+        const { name,number, licence,location, pid,slot,start,end } = req.body;
         //enshoring all fields are given 
         if (!name|| !licence||!location||!pid|| !slot || !start|| !end) {
             return res.status(401).json({
@@ -41,9 +41,9 @@ export const Booking = async (req, res) => {
         //adding new parking vehical to db
         await User.create({ name, number })
         const user = await User.findOne({ number })
-        await parking.create({ licence,location,pid,start,end })
-        await parking.create({ licence,location,pid,start,end })
-        const uid =user.find({ licence: licence })
+        await parking.create({ licence,location,pid,start,end,slot })
+        await parking.create({ licence,location,pid,start,end,slot })
+        const uid =User.find({ licence: licence })
         //user id for schema traversing 
         uid=uid._id
         //creating accounts for managing payments

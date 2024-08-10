@@ -23,7 +23,9 @@ app.use(cookieParser())
 dbconnect()
 //apis
 
-
+app.use("/api/test",(req,res)=>{
+  res.send("<h1>home page</h1>")
+})
 
 app.use("/api/park/user", taskRouters)
 
