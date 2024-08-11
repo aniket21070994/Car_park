@@ -2,7 +2,7 @@
 
 This is a Car Parking API built using Express.js. It provides functionalities for user registration, vehicle registration, booking slots, and searching for slots by city and zone.
 
-## Table of Contents
+### Table of Contents
 
 - [Installation](#installation)
 - [Configuration](#configuration)
@@ -32,7 +32,7 @@ MONGODB_URI=<your-mongodb-connection-string>
 
 
 ##URL http://localhost:8080/api/park/user
-## API Endpoints
+### API Endpoints
 
 ### 1. User Registration
 
@@ -48,8 +48,7 @@ MONGODB_URI=<your-mongodb-connection-string>
 }
 Responses:
 Success (201 Created):
-json
-Copy code
+
 {
   "success": true,
   "message": "Account created successfully.",
@@ -59,30 +58,32 @@ Copy code
     "number": "1234567890"
   }
 }
-Error (400 Bad Request):
-json
-Copy code
+```
+#Error (400 Bad Request):
+```
 {
   "success": false,
   "message": "All fields are required"
 }
-2. Vehicle Registration
-Method: POST
-Endpoint: /register-vehicle
+```
+##2. Vehicle Registration
+Method: `POST`
+Endpoint:`/register-vehicle`
 Description: Registers a new vehicle for a user.
-Request Body:
-json
-Copy code
+#Request Body:
+
+```
 {
   "userid": "user_id",
   "payment": "100",
   "licensePlate": "ABC-123",
   "vehicleType": "Car"
 }
-Responses:
+```
+#Responses:
+```
 Success (201 Created):
-json
-Copy code
+
 {
   "success": true,
   "message": "Vehicle added successfully.",
@@ -94,20 +95,21 @@ Copy code
     "vehicleType": "Car"
   }
 }
-Error (400 Bad Request):
-json
-Copy code
+```
+#Error (400 Bad Request):
+```
 {
   "success": false,
   "message": "All fields are required"
 }
-3. Book Slot
-Method: POST
-Endpoint: /book
+```
+##3. Book Slot
+Method: `POST`
+Endpoint: `/book`
 Description: Books a parking slot.
-Request Body:
-json
-Copy code
+#Request Body:
+
+```
 {
   "slotId": "slot_id",
   "userId": "user_id",
@@ -115,10 +117,9 @@ Copy code
   "start": "2024-08-10T10:00:00Z",
   "end": "2024-08-10T12:00:00Z"
 }
-Responses:
-Success (200 OK):
-json
-Copy code
+```
+#Responses:
+```Success (200 OK):
 {
   "success": true,
   "message": "Slot booked successfully",
@@ -131,28 +132,28 @@ Copy code
     "releaseAt": "2024-08-10T12:00:00Z"
   }
 }
-Error (404 Not Found):
-json
-Copy code
+```
+#Error (404 Not Found):
+```
 {
   "success": false,
   "message": "Slot not found"
 }
-4. Search by City
-Method: GET
+```
+##4. Search by City
+Method: `GET`
 
-Endpoint: /search/city/:city
+Endpoint: `/search/city/:city`
 
 Description: Searches for a city and returns its details.
 
-Parameters:
+#Parameters:
 
-city (string): The name of the city to search for.
+`city` (string): The name of the city to search for.
 Responses:
 
 Success (200 OK):
-json
-Copy code
+```
 {
   "success": true,
   "message": "Service available",
@@ -162,28 +163,28 @@ Copy code
     "zones": [ /* Array of zone objects */ ]
   }
 }
-Error (404 Not Found):
-json
-Copy code
+```
+#Error (404 Not Found):
+```
 {
   "success": false,
   "message": "Service not available"
 }
-5. Search by Slot
-Method: GET
+```
+##5. Search by Slot
+Method: `GET`
 
-Endpoint: /search/slot/:zoneId
+Endpoint: `/search/slot/:zoneId`
 
 Description: Searches for slots in a specific zone.
 
-Parameters:
+#Parameters:
 
-zoneId (string): The ID of the zone to search for slots.
-Responses:
+`zoneId` (string): The ID of the zone to search for slots.
+#Responses:
 
-Success (200 OK):
-json
-Copy code
+```Success (200 OK):
+
 {
   "success": true,
   "message": "Slots details",
@@ -196,27 +197,29 @@ Copy code
     // more slot objects
   ]
 }
-Error (404 Not Found):
-json
-Copy code
+```
+#Error (404 Not Found):
+```
 {
   "success": false,
   "message": "Slots not found"
 }
-Error Handling
+````
+##Error Handling
 In case of an internal server error, the API will respond with a 500 status code and a message indicating the error:
 
-json
-Copy code
+
+```
 {
   "success": false,
   "message": "Internal server error",
   "error": "Error details"
 }
-Running the Application
+```
+##Running the Application
 To run the application, execute:
 
-bash
-Copy code
+```
 npm start
+```
 The server will start and listen on the port specified in your .env file.
