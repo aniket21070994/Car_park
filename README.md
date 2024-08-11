@@ -18,17 +18,20 @@ This is a Car Parking API built using Express.js. It provides functionalities fo
 
 To get started, clone the repository and install the necessary dependencies:
 
-```bash
-git clone <repository-url>
+
+git clone https://github.com/aniket21070994/Car_park
 cd <project-directory>
 npm install
-Configuration
+## Configuration
 Create a .env file in the root directory of the project.
-Add the following environment variables:](http://localhost:8080/api/park/user
+Add the following environment variables:
+```json
+PORT=<your-port-number>
+MONGODB_URI=<your-mongodb-connection-string>
 
-markdown
-Copy code
 
+
+##URL http://localhost:8080/api/park/user
 ## API Endpoints
 
 ### 1. User Registration
