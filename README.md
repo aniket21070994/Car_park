@@ -25,7 +25,7 @@ npm install
 ## Configuration
 Create a .env file in the root directory of the project.
 Add the following environment variables:
-```json
+```
 PORT=<your-port-number>
 MONGODB_URI=<your-mongodb-connection-string>
 ```
