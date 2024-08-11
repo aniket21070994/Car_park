@@ -1,30 +1,17 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
+const vehicleSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    },
+    payment:{
+        type:Number,
+        require:true
+    },
+    licensePlate: { type: String, required: true, unique: true },
+    vehicleType: { type: String, required: true }, // e.g., car, motorcycle, etc.
+});
 
-
-const vehicalSchema=new mongoose.Schema({
-   uid:{
-    type:String,
-    require:true
-   },
-    licence:{
-        type:String,
-        required:true
-    },
-    location:{
-        type:String,
-        required:true
-    },
-    pid:{
-        type:String,
-        required:true
-    },
-    start:{
-        type:Date,
-        required:true
-    },
-    end: {
-        type:Date,
-        required:true
-    },  
-})
-export const vehical=mongoose.model("vehical",vehicalSchema)
+const Vehicle = mongoose.model('Vehicle', vehicleSchema);
+export default Vehicle;
