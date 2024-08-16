@@ -1,12 +1,19 @@
 import Slot from '../models/slotSchema.js'; // Corrected import path
-
+import Amount from '../models/amountSchema.js';
 
 export const bookSlot = async (req, res) => {
-    const { slotId, userId, vehicleId, start, end } = req.body;
+    const { slotId, userId, vehicleId, start, end ,payment} = req.body;
 
     try {
+        if(!slotId|| !userId|| !vehicleId|| !start|| !end ||!payment)
+        {
+            res.status(400).json({
+                message:"all fields required",
+                success:false
+            })
+        }
         const slot = await Slot.findById(slotId)
-
+     
         // Check if the slot exists and is not occupied
         if (!slot) {
             return res.status(404).json({ 
@@ -21,14 +28,15 @@ export const bookSlot = async (req, res) => {
                 success: false
             });
         }
-
+        
         // Update the slot's occupancy and booking details
+        await Amount.create({userID:userId,vehicalId:vehicleId,payment});
         slot.isOccupied = true; // Mark the slot as occupied
         slot.bookedBy = userId; // Associate the user who booked it
         slot.vehicle = vehicleId; // Associate the vehicle
         slot.bookedAt = start; // Set the bookedAt time
         slot.releaseAt = end; // Set releaseAt to the specified end time
-
+        
         await slot.save(); // Save the updated slot
 
         console.log('Slot booked successfully:', slot);

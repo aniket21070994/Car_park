@@ -3,11 +3,11 @@ import dotenv from "dotenv"
 import dbconnect from './config/db.js'
 import cookieParser from 'cookie-parser'
 import taskRouters from "./Routs/taskRouters.js"
-
+import { checkAndUpdateSlots } from './config/dbMonitor.js'
 import cors from "cors"
 const app = express()
 dotenv.config()
-
+setInterval(checkAndUpdateSlots, 60000); // 60000 ms = 1 minut
 //middelwares
 app.use(express.urlencoded({
   extended: true

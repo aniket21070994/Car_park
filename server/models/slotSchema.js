@@ -19,16 +19,17 @@ const slotSchema = new mongoose.Schema({
 
 // Pre-save middleware to check for release time
 slotSchema.pre('save', function (next) {
-    // Check if releaseAt exists and if it is less than the current date
-    if (this.releaseAt && this.releaseAt < new Date()) {
-        this.isOccupied = false; // Set isOccupied to false if the releaseAt time has passed
-        this.bookedBy = null;    // Optionally clear bookedBy
-        this.vehicle = null;      // Optionally clear vehicle
-        this.bookedAt = null;     // Optionally clear bookedAt
-        this.releaseAt = null;    // Optionally clear releaseAt
+    console.log('Middleware triggered:', this);
+    if (this.releaseAt< new Date()) {
+        this.isOccupied = false;
+        this.bookedBy = null;
+        this.vehicle = null;
+        this.bookedAt = null;
+        this.releaseAt = null;
     }
-    next(); // Proceed with the save operation
+    next();
 });
+
 
 // Create the Slot model
 const Slot = mongoose.model('Slot', slotSchema);

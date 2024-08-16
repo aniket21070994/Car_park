@@ -35,7 +35,7 @@ export const searchBySlot = async (req, res) => {
         
         const slots = await Zone.findById(zoneId).populate("slots")
         console.log(slots);
-        if (slots && slots.length > 0) { // Check if slots array is not empty
+        if (slots) { // Check if slots array is not empty
             return res.status(200).json({
                 message: "Slots details",
                 success: true,

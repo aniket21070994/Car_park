@@ -43,33 +43,37 @@ export const registerVehical = async (req, res) => {
         const { userid,payment,licensePlate,vehicleType } = req.body;
         //enshoring all fields are given 
         if (!userid || !payment || !licensePlate || !vehicleType) {
-            return res.status(401).json({
+            return res.status(400).json({
                 message: "All fields are require",
                 success: false
             })
         }
         
         //adding new user to db
-        const ver=await Vehicle.find({licensePlate});
-        if(ver)
+      
+        let vehical=await Vehicle.findOne({licensePlate});
+        if(vehical)
         {
-            return res.status(201).json({
-                ver,
+            return res.status(200).json({
+                vehical,
                 message: "vehical alredy registerd  .",
                 success: true
             })
         }
-       const vehicals= await Vehicle.create({ user:userid,payment,licensePlate,vehicleType, })
-       const user = await User.findOne({ _id:userid })
-       if(user.vehicles)
-       {
-        user.vehicles.push(vehicals._id);
-        await user.save(); // Save the updated user documen
-       }
-     
+      
+            vehical= await Vehicle.create({ user:userid,payment,licensePlate,vehicleType, })
+            const user = await User.findOne({ _id:userid })
+            console.log(user);
+           if(user)
+           {
+              user.vehicles.push(vehical._id);
+              await user.save(); // Save the updated user documen
+           }
+
+    
      
         return res.status(201).json({
-            vehicals,
+            vehical,
             message: "vehical added  successfully .",
             success: true
         })
